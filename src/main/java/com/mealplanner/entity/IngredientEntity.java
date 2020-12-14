@@ -5,7 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ingredients")
 public class IngredientEntity {
-
+    
+    public IngredientEntity() {}
+    
     @Id
     @GeneratedValue
     private int id;
