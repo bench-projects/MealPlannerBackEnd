@@ -1,19 +1,4 @@
 HELP.md
-target
-!.mvnwrappermaven-wrapper.jar
-!srcmain
-!srctest
-
-.mvn
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
@@ -21,13 +6,13 @@ target
 .iml
 .ipr
 
-### NetBeans ###
-nbprojectprivate
-nbbuild
-dist
-nbdist
-.nb-gradle
-build
-
-### VS Code ###
-.vscode
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
