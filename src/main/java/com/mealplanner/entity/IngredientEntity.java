@@ -3,7 +3,7 @@ package com.mealplanner.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "sandwich")
+@Table(name = "ingredients")
 public class IngredientEntity {
 
     @Id
