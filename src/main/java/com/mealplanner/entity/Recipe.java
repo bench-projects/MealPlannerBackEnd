@@ -1,11 +1,9 @@
 package com.mealplanner.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "recipe")
 public class Recipe {
 
     public Recipe(){}
@@ -14,10 +12,10 @@ public class Recipe {
     @GeneratedValue
     private int id;
 
-    @Column
+    @Column(name = "recipe_name", nullable = false, length = 200)
     private String recipe_name;
 
-    @Column
+    @Column(name = "ingredient_ids", nullable = false)
     private String ingredient_ids;
 
     public int getId() {
