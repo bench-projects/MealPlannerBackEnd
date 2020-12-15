@@ -6,9 +6,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "recipe")
-public class Recipe {
+public class RecipeEntity {
 
-    public Recipe(){}
+    public RecipeEntity(){}
 
     @Id
     @GeneratedValue
@@ -16,9 +16,6 @@ public class Recipe {
 
     @Column(name = "recipe_name", nullable = false, length = 200)
     private String recipe_name;
-
-    @Column(name = "ingredient_ids", nullable = false)
-    private String ingredient_ids;
 
     public int getId() {
         return id;
@@ -36,11 +33,4 @@ public class Recipe {
         this.recipe_name = recipe_name;
     }
 
-    public String getIngredient_ids() {
-        return ingredient_ids;
-    }
-
-    public void setIngredient_ids(String ingredient_ids) {
-        this.ingredient_ids = ingredient_ids;
-    }
 }
