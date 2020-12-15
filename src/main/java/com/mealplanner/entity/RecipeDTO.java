@@ -3,7 +3,7 @@ package com.mealplanner.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetRecipe {
+public class RecipeDTO {
     private int id;
 
     private String recipe_name;
