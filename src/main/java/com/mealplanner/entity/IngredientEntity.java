@@ -1,5 +1,7 @@
 package com.mealplanner.entity;
 
+import org.springframework.context.annotation.ComponentScan;
+
 import javax.persistence.*;
 
 @Entity
