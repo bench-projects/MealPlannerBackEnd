@@ -21,13 +21,13 @@ public class RecipeController {
     }
 
     @GetMapping(path = "/get/All")
-    public ResponseEntity<List<RecipeEntity>> getrecipes(){
-        return new ResponseEntity<>(recipeService.getAllrecipes(), HttpStatus.OK);
+    public ResponseEntity<List<RecipeEntity>> getRecipes(){
+        return new ResponseEntity<>(recipeService.getAllRecipes(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/get/{id}")
-    public ResponseEntity<Optional<RecipeEntity>> getrecipe(@PathVariable("id") Integer id){
-        Optional<RecipeEntity> existingRecipe = this.recipeService.getrecipe(id);
+    public ResponseEntity<Optional<RecipeEntity>> getRecipe(@PathVariable("id") Integer id){
+        Optional<RecipeEntity> existingRecipe = this.recipeService.getRecipe(id);
         if (existingRecipe.isPresent()){
             return ResponseEntity.ok(existingRecipe);
         } else {
@@ -36,7 +36,7 @@ public class RecipeController {
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<RecipeEntity> addrecipe(@RequestBody RecipeEntity recipeEntity){
+    public ResponseEntity<RecipeEntity> addRecipe(@RequestBody RecipeEntity recipeEntity){
         RecipeEntity newRecipe = recipeService.addRecipe(recipeEntity);
         return ResponseEntity.status(HttpStatus.CREATED).body(newRecipe);
     }
