@@ -18,7 +18,7 @@ public class IngredientEntity {
     private String ing_name;
 
     @Column(name = "quantity_count", nullable = false, length = 3)
-    private int quantity_count;
+    private float quantity_count;
 
     public int getId() {
         return id;
@@ -36,11 +36,11 @@ public class IngredientEntity {
         this.ing_name = ing_name;
     }
 
-    public int getQuantity_count() {
+    public float getQuantity_count() {
         return quantity_count;
     }
 
-    public void setQuantity_count(int quantity_count) {
+    public void setQuantity_count(float quantity_count) {
         this.quantity_count = quantity_count;
     }
 }
