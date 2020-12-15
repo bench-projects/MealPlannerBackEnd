@@ -9,7 +9,12 @@ import javax.persistence.*;
 public class IngredientEntity {
     
     public IngredientEntity() {}
-    
+
+    public IngredientEntity(String ing_name, float quantity_count) {
+        this.ing_name = ing_name;
+        this.quantity_count = quantity_count;
+    }
+
     @Id
     @GeneratedValue
     private int id;
@@ -19,6 +24,7 @@ public class IngredientEntity {
 
     @Column(name = "quantity_count", nullable = false, length = 3)
     private float quantity_count;
+
 
     public int getId() {
         return id;
