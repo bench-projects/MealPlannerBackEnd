@@ -1,5 +1,7 @@
 package com.mealplanner.entity;
 
+import org.springframework.context.annotation.ComponentScan;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,4 +27,5 @@ public class GetRecipe {
     public void setIngredientList(List<IngredientEntity> ingredientList) {
         this.ingredientList = ingredientList;
     }
+
 }
