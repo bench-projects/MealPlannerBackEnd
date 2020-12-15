@@ -1,30 +1,26 @@
 package com.mealplanner.entity;
 
-import org.springframework.context.annotation.ComponentScan;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ingredients")
 public class IngredientEntity {
-    
-    public IngredientEntity() {}
-
-    public IngredientEntity(String ing_name, float quantity_count) {
-        this.ing_name = ing_name;
-        this.quantity_count = quantity_count;
-    }
 
     @Id
     @GeneratedValue
     private int id;
-
-    @Column(name = "ing_name", nullable = false, length = 100)
-    private String ing_name;
-
+    @Column(name = "ingredient_name", nullable = false, length = 100)
+    private String ingredient_name;
     @Column(name = "quantity_count", nullable = false, length = 3)
     private float quantity_count;
 
+    public IngredientEntity() {
+    }
+
+    public IngredientEntity(String ingredient_name, float quantity_count) {
+        this.ingredient_name = ingredient_name;
+        this.quantity_count = quantity_count;
+    }
 
     public int getId() {
         return id;
@@ -34,12 +30,12 @@ public class IngredientEntity {
         this.id = id;
     }
 
-    public String getIng_name() {
-        return ing_name;
+    public String getIngredient_name() {
+        return ingredient_name;
     }
 
-    public void setIng_name(String ing_name) {
-        this.ing_name = ing_name;
+    public void setIngredient_name(String ingredient_name) {
+        this.ingredient_name = ingredient_name;
     }
 
     public float getQuantity_count() {

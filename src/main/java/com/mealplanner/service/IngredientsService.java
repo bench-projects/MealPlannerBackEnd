@@ -11,21 +11,21 @@ import java.util.Optional;
 @Service
 public class IngredientsService {
 
-    private IngredientsRepository ingredientsRepository;
+    private final IngredientsRepository ingredientsRepository;
 
-    private IngredientsService(@Autowired IngredientsRepository ingredientsRepository){
+    private IngredientsService(@Autowired IngredientsRepository ingredientsRepository) {
         this.ingredientsRepository = ingredientsRepository;
     }
 
     public List<IngredientEntity> getAllIngredients() {
-        return (List<IngredientEntity>) ingredientsRepository.findAll();
+        return ingredientsRepository.findAll();
     }
 
-    public Optional<IngredientEntity> getIngredient(Integer id){
+    public Optional<IngredientEntity> getIngredient(Integer id) {
         return ingredientsRepository.findById(id);
     }
 
-    public  IngredientEntity addIngredient(IngredientEntity ingredientEntity){
+    public IngredientEntity addIngredient(IngredientEntity ingredientEntity) {
         ingredientsRepository.save(ingredientEntity);
         return ingredientEntity;
     }

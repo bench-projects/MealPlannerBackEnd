@@ -14,21 +14,21 @@ import java.util.Optional;
 @RequestMapping(path = "/recipe")
 public class RecipeController {
 
-    private RecipeService recipeService;
+    private final RecipeService recipeService;
 
-    private RecipeController (@Autowired RecipeService recipeService){
+    private RecipeController(@Autowired RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
     @GetMapping(path = "/get/All")
-    public ResponseEntity<List<RecipeEntity>> getRecipes(){
+    public ResponseEntity<List<RecipeEntity>> getRecipes() {
         return new ResponseEntity<>(recipeService.getAllRecipes(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/get/{id}")
-    public ResponseEntity<Optional<RecipeEntity>> getRecipe(@PathVariable("id") Integer id){
+    public ResponseEntity<Optional<RecipeEntity>> getRecipe(@PathVariable("id") Integer id) {
         Optional<RecipeEntity> existingRecipe = this.recipeService.getRecipe(id);
-        if (existingRecipe.isPresent()){
+        if (existingRecipe.isPresent()) {
             return ResponseEntity.ok(existingRecipe);
         } else {
             return ResponseEntity.notFound().build();
@@ -36,8 +36,7 @@ public class RecipeController {
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<RecipeEntity> addRecipe(@RequestBody RecipeEntity recipeEntity){
-        RecipeEntity newRecipe = recipeService.addRecipe(recipeEntity);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newRecipe);
+    public ResponseEntity<RecipeEntity> addRecipe(@RequestBody RecipeEntity recipeEntity) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(recipeService.addRecipe(recipeEntity));
     }
 }

@@ -13,14 +13,14 @@ import java.util.Optional;
 @RestController
 public class RecipeIngredientLinkController {
 
-    private RecipeIngredientLinkService recipeIngredientLinkService;
+    private final RecipeIngredientLinkService recipeIngredientLinkService;
 
-    private RecipeIngredientLinkController(@Autowired RecipeIngredientLinkService recipeIngredientLinkService){
+    private RecipeIngredientLinkController(@Autowired RecipeIngredientLinkService recipeIngredientLinkService) {
         this.recipeIngredientLinkService = recipeIngredientLinkService;
     }
 
     @GetMapping(path = "/getLink/{id}")
-    public ResponseEntity<Optional<RecipeIngredientLinkEntity>> getLink(@PathVariable("id") Integer id){
+    public ResponseEntity<Optional<RecipeIngredientLinkEntity>> getLink(@PathVariable("id") Integer id) {
         Optional<RecipeIngredientLinkEntity> existingDrink = recipeIngredientLinkService.getLink(id);
         if (existingDrink.isPresent()) {
             return ResponseEntity.ok(existingDrink);
