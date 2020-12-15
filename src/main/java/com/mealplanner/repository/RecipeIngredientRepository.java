@@ -1,6 +1,5 @@
 package com.mealplanner.repository;
 
-import com.mealplanner.entity.RecipeEntity;
 import com.mealplanner.entity.RecipeIngredientLinkEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

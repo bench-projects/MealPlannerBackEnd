@@ -1,7 +1,5 @@
 package com.mealplanner.entity;
 
-import org.springframework.context.annotation.ComponentScan;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -14,21 +14,21 @@ import java.util.Optional;
 @RequestMapping(path = "/ingredients")
 public class IngredientsController {
 
-    private IngredientsService ingredientsService;
+    private final IngredientsService ingredientsService;
 
-    private IngredientsController (@Autowired IngredientsService ingredientsService){
+    private IngredientsController(@Autowired IngredientsService ingredientsService) {
         this.ingredientsService = ingredientsService;
     }
 
     @GetMapping(path = "/get/All")
-    public ResponseEntity<List<IngredientEntity>> getIngredients(){
+    public ResponseEntity<List<IngredientEntity>> getIngredients() {
         return new ResponseEntity<>(ingredientsService.getAllIngredients(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/get/{id}")
-    public ResponseEntity<Optional<IngredientEntity>> getIngredient(@PathVariable("id") Integer id){
+    public ResponseEntity<Optional<IngredientEntity>> getIngredient(@PathVariable("id") Integer id) {
         Optional<IngredientEntity> existingIngredient = this.ingredientsService.getIngredient(id);
-        if (existingIngredient.isPresent()){
+        if (existingIngredient.isPresent()) {
             return ResponseEntity.ok(existingIngredient);
         } else {
             return ResponseEntity.notFound().build();
@@ -36,10 +36,7 @@ public class IngredientsController {
     }
 
     @PostMapping(path = "/add")
-    public ResponseEntity<IngredientEntity> addIngredient(@RequestBody IngredientEntity ingredientEntity){
-        IngredientEntity newIngredient = ingredientsService.addIngredient(ingredientEntity);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newIngredient);
+    public ResponseEntity<IngredientEntity> addIngredient(@RequestBody IngredientEntity ingredientEntity) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(ingredientsService.addIngredient(ingredientEntity));
     }
-
-
 }
