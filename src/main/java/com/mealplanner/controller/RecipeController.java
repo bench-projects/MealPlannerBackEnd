@@ -1,6 +1,8 @@
 package com.mealplanner.controller;
 
+import com.mealplanner.entity.RecipeDTO;
 import com.mealplanner.entity.RecipeEntity;
+import com.mealplanner.mapper.RecipeMapper;
 import com.mealplanner.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,9 @@ import java.util.Optional;
 @RequestMapping(path = "/recipe")
 public class RecipeController {
 
+    @Autowired
+    private RecipeMapper recipeMapper;
+
     private final RecipeService recipeService;
 
     private RecipeController(@Autowired RecipeService recipeService) {
@@ -21,8 +26,8 @@ public class RecipeController {
     }
 
     @GetMapping(path = "/get/All")
-    public ResponseEntity<List<RecipeEntity>> getRecipes() {
-        return new ResponseEntity<>(recipeService.getAllRecipes(), HttpStatus.OK);
+    public ResponseEntity<List<RecipeDTO>> getRecipes() {
+        return recipeMapper.mapRecipe(recipeService.getAllRecipes());
     }
 
     @GetMapping(path = "/get/{id}")
