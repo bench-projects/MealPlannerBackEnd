@@ -30,4 +30,12 @@ public class IngredientsService {
         return ingredientEntity;
     }
 
+    public Optional<IngredientEntity> updateIngredientEntity(int id, IngredientEntity ingredientEntity)  {
+        return ingredientsRepository.findById(id).map(updatedIngredientEntity -> {
+            updatedIngredientEntity.setIngredient_name(ingredientEntity.getIngredient_name());
+            updatedIngredientEntity.setQuantity_count(ingredientEntity.getQuantity_count());
+            return ingredientsRepository.save(updatedIngredientEntity);
+        });
+    }
+
 }
