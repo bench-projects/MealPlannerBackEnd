@@ -21,7 +21,7 @@ public class IngredientsController {
     }
 
     @GetMapping(path = "/get/All")
-    public ResponseEntity<List<IngredientEntity>> getIngredients() {
+    public ResponseEntity<List<IngredientEntity>> getAllIngredients() {
         return new ResponseEntity<>(ingredientsService.getAllIngredients(), HttpStatus.OK);
     }
 
