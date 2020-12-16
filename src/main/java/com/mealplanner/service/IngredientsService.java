@@ -25,6 +25,10 @@ public class IngredientsService {
         return ingredientsRepository.findById(id);
     }
 
+    public List<IngredientEntity> getAllIngredientsById(List<Integer> ids){
+        return ingredientsRepository.findAllById(ids);
+    }
+
     public IngredientEntity addIngredient(IngredientEntity ingredientEntity) {
         ingredientsRepository.save(ingredientEntity);
         return ingredientEntity;
