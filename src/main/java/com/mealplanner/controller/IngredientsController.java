@@ -21,7 +21,7 @@ public class IngredientsController {
     }
 
     @GetMapping(path = "/get/All")
-    public ResponseEntity<List<IngredientEntity>> getIngredients() {
+    public ResponseEntity<List<IngredientEntity>> getAllIngredients() {
         return new ResponseEntity<>(ingredientsService.getAllIngredients(), HttpStatus.OK);
     }
 
@@ -43,9 +43,9 @@ public class IngredientsController {
     @PutMapping(path = "/update/{id}")
     public ResponseEntity<Optional<IngredientEntity>> updateIngredientEntity(@PathVariable("id") Integer id, @RequestBody IngredientEntity ingredientEntity) {
         Optional<IngredientEntity> updatedIngredient = this.ingredientsService.updateIngredientEntity(id, ingredientEntity);
-        if  (updatedIngredient.isPresent())  {
+        if (updatedIngredient.isPresent()) {
             return ResponseEntity.ok(updatedIngredient);
-        }   else    {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
