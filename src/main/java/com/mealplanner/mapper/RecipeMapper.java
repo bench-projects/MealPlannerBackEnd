@@ -1,6 +1,5 @@
 package com.mealplanner.mapper;
 
-import com.mealplanner.entity.IngredientEntity;
 import com.mealplanner.entity.RecipeDTO;
 import com.mealplanner.entity.RecipeEntity;
 import com.mealplanner.service.IngredientsService;
@@ -20,19 +19,19 @@ public class RecipeMapper {
     @Autowired
     private IngredientsService ingredientsService;
 
-    public ResponseEntity<List<RecipeDTO>> mapRecipe(List<RecipeEntity> recipes){
+    public ResponseEntity<List<RecipeDTO>> mapRecipe(List<RecipeEntity> recipes) {
         List<RecipeDTO> recipeDTOList = new ArrayList<>();
         recipes.forEach(recipeEntity -> recipeDTOList.add(getIngredients(recipeEntity)));
         return new ResponseEntity<>(recipeDTOList, HttpStatus.OK);
     }
 
-    public ResponseEntity<List<RecipeDTO>> mapRecipe(RecipeEntity recipe){
+    public ResponseEntity<List<RecipeDTO>> mapRecipe(RecipeEntity recipe) {
         List<RecipeDTO> recipeDTOList = new ArrayList<>();
         recipeDTOList.add(getIngredients(recipe));
         return new ResponseEntity<>(recipeDTOList, HttpStatus.OK);
     }
 
-    private RecipeDTO getIngredients(RecipeEntity recipeEntity){
+    public RecipeDTO getIngredients(RecipeEntity recipeEntity) {
         List<String> ingredientStringIdList = toList(recipeEntity.getIngredients().split(","));
         List<Integer> ingredientIdList = new ArrayList<>();
         ingredientStringIdList.forEach(stringId -> ingredientIdList.add(Integer.valueOf(stringId)));
