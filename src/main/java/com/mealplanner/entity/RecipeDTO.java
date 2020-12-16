@@ -10,6 +10,11 @@ public class RecipeDTO {
 
     private List<IngredientEntity> ingredientList = new ArrayList<>();
 
+    public RecipeDTO(String recipe_name, List<IngredientEntity> ingredientList) {
+        this.recipe_name = recipe_name;
+        this.ingredientList = ingredientList;
+    }
+
     public String getRecipe_name() {
         return recipe_name;
     }
