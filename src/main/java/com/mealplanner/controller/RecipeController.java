@@ -31,10 +31,10 @@ public class RecipeController {
     }
 
     @GetMapping(path = "/get/{id}")
-    public ResponseEntity<Optional<RecipeEntity>> getRecipe(@PathVariable("id") Integer id) {
+    public ResponseEntity<List<RecipeDTO>> getRecipe(@PathVariable("id") Integer id) {
         Optional<RecipeEntity> existingRecipe = this.recipeService.getRecipe(id);
         if (existingRecipe.isPresent()) {
-            return ResponseEntity.ok(existingRecipe);
+            return recipeMapper.mapRecipe(existingRecipe.get());
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -43,5 +43,16 @@ public class RecipeController {
     @PostMapping(path = "/add")
     public ResponseEntity<RecipeEntity> addRecipe(@RequestBody RecipeEntity recipeEntity) {
         return ResponseEntity.status(HttpStatus.CREATED).body(recipeService.addRecipe(recipeEntity));
+    }
+
+    @PutMapping(path = "/update/{id}")
+    public ResponseEntity<Optional<RecipeEntity>> updateRecipe(@PathVariable("id") Integer id, @RequestBody RecipeEntity recipeEntity) {
+        Optional<RecipeEntity> updatedRecipe = this.recipeService.updateRecipeEntity(id, recipeEntity);
+        if(updatedRecipe.isPresent()){
+            return ResponseEntity.ok(updatedRecipe);
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }
