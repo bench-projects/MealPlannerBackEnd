@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hibernate.internal.util.collections.ArrayHelper.toList;
 
@@ -22,15 +23,20 @@ public class RecipeMapper {
 
     public ResponseEntity<List<RecipeDTO>> mapRecipe(List<RecipeEntity> recipes){
         List<RecipeDTO> recipeDTOList = new ArrayList<>();
-
-        recipes.forEach(recipeEntity -> {
-            List<String> ingredientStringIdList = toList(recipeEntity.getIngredients().split(","));
-            List<Integer> ingredientIdList = new ArrayList<>();
-            ingredientStringIdList.forEach(stringId -> ingredientIdList.add(Integer.valueOf(stringId)));
-            RecipeDTO recipeDTO = new RecipeDTO(recipeEntity.getRecipe_name(), ingredientsService.getAllIngredientsById(ingredientIdList));
-            recipeDTOList.add(recipeDTO);
-        });
-
+        recipes.forEach(recipeEntity -> recipeDTOList.add(getIngredients(recipeEntity)));
         return new ResponseEntity<>(recipeDTOList, HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<RecipeDTO>> mapRecipe(RecipeEntity recipe){
+        List<RecipeDTO> recipeDTOList = new ArrayList<>();
+        recipeDTOList.add(getIngredients(recipe));
+        return new ResponseEntity<>(recipeDTOList, HttpStatus.OK);
+    }
+
+    private RecipeDTO getIngredients(RecipeEntity recipeEntity){
+        List<String> ingredientStringIdList = toList(recipeEntity.getIngredients().split(","));
+        List<Integer> ingredientIdList = new ArrayList<>();
+        ingredientStringIdList.forEach(stringId -> ingredientIdList.add(Integer.valueOf(stringId)));
+        return new RecipeDTO(recipeEntity.getRecipe_name(), ingredientsService.getAllIngredientsById(ingredientIdList));
     }
 }
