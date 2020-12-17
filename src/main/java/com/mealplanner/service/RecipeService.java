@@ -1,5 +1,6 @@
 package com.mealplanner.service;
 
+import com.mealplanner.entity.IngredientEntity;
 import com.mealplanner.entity.RecipeEntity;
 import com.mealplanner.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,9 @@ public class RecipeService {
             updatedRecipeEntity.setIngredients(recipeEntity.getIngredients());
             return recipeRepository.save(updatedRecipeEntity);
         });
+    }
+
+    public List<RecipeEntity> getAllIngredientsById(List<Integer> ids){
+        return recipeRepository.findAllById(ids);
     }
 }

@@ -1,6 +1,7 @@
 package com.mealplanner.entity;
 
 import com.mealplanner.repository.IngredientsRepository;
+import com.mealplanner.repository.MealPlanRepository;
 import com.mealplanner.repository.RecipeIngredientRepository;
 import com.mealplanner.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,16 @@ import org.springframework.stereotype.Component;
 public class DataLoader {
     private final IngredientsRepository ingredientsRepository;
     private final RecipeRepository recipeRepository;
+    private final MealPlanRepository mealPlanRepository;
 
     @Autowired
-    public DataLoader(IngredientsRepository ingredientsRepository, RecipeRepository recipeRepository) {
+    public DataLoader(IngredientsRepository ingredientsRepository, RecipeRepository recipeRepository, MealPlanRepository mealPlanRepository) {
         this.ingredientsRepository = ingredientsRepository;
         this.recipeRepository = recipeRepository;
+        this.mealPlanRepository = mealPlanRepository;
         LoadIngredients();
         LoadRecipes();
+        LoadMealPlan();
     }
 
     private void LoadIngredients() {
@@ -31,5 +35,9 @@ public class DataLoader {
     private void LoadRecipes(){
         recipeRepository.save(new RecipeEntity("Onion Soup", "1,4,6"));
         recipeRepository.save(new RecipeEntity("Tomato Pasta", "6,2,3"));
+    }
+
+    private void LoadMealPlan(){
+        mealPlanRepository.save(new MealPlanEntity("7,7,8", "8,8,8", "", "", "7,8", "", "8,7" ));
     }
 }
