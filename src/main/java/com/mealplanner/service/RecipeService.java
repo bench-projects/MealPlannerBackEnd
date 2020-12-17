@@ -30,11 +30,15 @@ public class RecipeService {
         return recipeEntity;
     }
 
-    public Optional<RecipeEntity> updateRecipeEntity(int id, RecipeEntity recipeEntity)  {
+    public Optional<RecipeEntity> updateRecipeEntity(int id, RecipeEntity recipeEntity) {
         return recipeRepository.findById(id).map(updatedRecipeEntity -> {
             updatedRecipeEntity.setRecipe_name(recipeEntity.getRecipe_name());
             updatedRecipeEntity.setIngredients(recipeEntity.getIngredients());
             return recipeRepository.save(updatedRecipeEntity);
         });
+    }
+
+    public List<RecipeEntity> getAllRecipesById(List<Integer> ids) {
+        return recipeRepository.findAllById(ids);
     }
 }
