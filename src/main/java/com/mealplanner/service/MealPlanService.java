@@ -31,7 +31,7 @@ public class MealPlanService {
         return mealPlanEntity;
     }
 
-    public Optional<MealPlanEntity> updateRecipeEntity(int id, MealPlanEntity mealPlanEntity)  {
+    public Optional<MealPlanEntity> updateMealPlan(int id, MealPlanEntity mealPlanEntity)  {
         return mealPlanRepository.findById(id).map(updatedMealPlanEntity -> {
             updatedMealPlanEntity.setMonday(mealPlanEntity.getMonday());
             updatedMealPlanEntity.setTuesday(mealPlanEntity.getTuesday());
