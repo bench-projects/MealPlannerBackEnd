@@ -15,6 +15,10 @@ public class RecipeDTO {
         this.ingredientList = ingredientList;
     }
 
+    public RecipeDTO() {
+
+    }
+
     public String getRecipe_name() {
         return recipe_name;
     }
