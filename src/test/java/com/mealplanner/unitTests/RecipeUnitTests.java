@@ -14,14 +14,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,28 +41,45 @@ public class RecipeUnitTests {
     RecipeMapper recipeMapper;
 
     @Test
-    public void testGetRecipe() {
-        IngredientEntity ingredientEntity = new IngredientEntity("test", 5);
-        RecipeEntity recipeEntity = new RecipeEntity("Soup", "1");
-        List<RecipeEntity> recipeEntities = new ArrayList<>();
-        recipeEntities.add(recipeEntity);
-
-        RecipeDTO recipeDTO = new RecipeDTO(recipeEntity.getRecipe_name(), Collections.singletonList(ingredientEntity));
-        List<RecipeDTO> recipeDTOs = new ArrayList<>();
-        recipeDTOs.add(recipeDTO);
-
-
-        ResponseEntity<List<RecipeDTO>> listResponseEntity = new ResponseEntity<>(recipeDTOs, HttpStatus.OK);
-
+    public void testGetAllRecipes() {
+        IngredientEntity ingredientEntity = new IngredientEntity("Chicken", 3);
         List<Integer> ids = new ArrayList<>();
         ids.add(1);
+        when(this.ingredientsService.getAllIngredientsById(ids)).thenReturn(Collections.singletonList(ingredientEntity));
+        ReflectionTestUtils.setField(recipeMapper, "ingredientsService", ingredientsService);
+
+        List<RecipeEntity> recipeEntities = new ArrayList<>();
+        recipeEntities.add(new RecipeEntity("Pie", "1"));
 
         when(this.recipeService.getAllRecipes()).thenReturn(recipeEntities);
-        when(this.recipeMapper.getIngredients(recipeEntity)).thenReturn(recipeDTO);
-        when(this.recipeMapper.mapRecipe(recipeEntities)).thenReturn(listResponseEntity);
-        when(this.ingredientsService.getAllIngredientsById(ids)).thenReturn(Collections.singletonList(ingredientEntity));
+        ReflectionTestUtils.setField(recipeController, "recipeMapper", recipeMapper);
 
-        assertEquals(this.recipeController.getRecipes().getBody(), recipeDTOs);
+        RecipeDTO actualRecipeDTO = Objects.requireNonNull(this.recipeController.getRecipes().getBody()).get(0);
+        assertEquals(actualRecipeDTO.getRecipe_name(), "Pie");
+        IngredientEntity actualIngredientEntity = actualRecipeDTO.getIngredientList().get(0);
+        assertEquals(actualIngredientEntity.getIngredient_name(), "Chicken");
+        assertEquals(actualIngredientEntity.getQuantity_count(), 3);
+        assertThat(this.recipeController.getRecipes().getStatusCodeValue()).isEqualTo((200));
+    }
+
+    @Test
+    public void testGetSingularRecipeById() {
+        IngredientEntity ingredientEntity = new IngredientEntity("Lamb", 2);
+        List<Integer> ids = new ArrayList<>();
+        ids.add(2);
+        when(this.ingredientsService.getAllIngredientsById(ids)).thenReturn(Collections.singletonList(ingredientEntity));
+        ReflectionTestUtils.setField(recipeMapper, "ingredientsService", ingredientsService);
+
+        RecipeEntity recipeEntity = new RecipeEntity("Curry", "2");
+
+        when(this.recipeService.getRecipe(1)).thenReturn(Optional.of(recipeEntity));
+        ReflectionTestUtils.setField(recipeController, "recipeMapper", recipeMapper);
+
+        RecipeDTO actualRecipeDTO = Objects.requireNonNull(this.recipeController.getRecipe(1).getBody()).get(0);
+        assertEquals(actualRecipeDTO.getRecipe_name(), "Curry");
+        IngredientEntity actualIngredientEntity = actualRecipeDTO.getIngredientList().get(0);
+        assertEquals(actualIngredientEntity.getIngredient_name(), "Lamb");
+        assertEquals(actualIngredientEntity.getQuantity_count(), 2);
         assertThat(this.recipeController.getRecipes().getStatusCodeValue()).isEqualTo((200));
     }
 
