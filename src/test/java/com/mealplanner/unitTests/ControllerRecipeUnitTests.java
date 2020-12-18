@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RecipeUnitTests {
+public class ControllerRecipeUnitTests {
 
     @InjectMocks
     RecipeController recipeController;
@@ -84,7 +84,7 @@ public class RecipeUnitTests {
     }
 
     @Test
-    public void addIngredientTest() {
+    public void addRecipeTest() {
         RecipeEntity recipeEntity = new RecipeEntity("test", "1");
 
         Mockito.when(this.recipeService.addRecipe(recipeEntity)).thenReturn(recipeEntity);
@@ -94,7 +94,7 @@ public class RecipeUnitTests {
     }
 
     @Test
-    public void updateIngredientEntityTest() {
+    public void updateRecipeEntityTest() {
         RecipeEntity recipeEntity = new RecipeEntity();
 
         Mockito.when(this.recipeService.updateRecipeEntity(0, recipeEntity)).thenReturn(Optional.of(recipeEntity));
