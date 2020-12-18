@@ -66,5 +66,18 @@ public class ServiceIngredientUnitTests {
         assertThat(this.ingredientsService.updateIngredientEntity(1, ingredientEntity)).isEqualTo(Optional.of(ingredientEntity));
     }
 
+    @Test
+    public void getAllIngredientsByIdTest() {
+        IngredientEntity ingredientEntity = new IngredientEntity();
+        List ingredientIdList = new ArrayList<>();
+        ingredientIdList.add(1);
+        List ingredientList = new ArrayList<>();
+        ingredientList.add(ingredientEntity);
+
+        Mockito.when(this.ingredientsRepository.findAllById(ingredientIdList)).thenReturn(ingredientList);
+
+        assertThat(this.ingredientsService.getAllIngredientsById(ingredientIdList)).isEqualTo(ingredientList);
+    }
+
 
 }
