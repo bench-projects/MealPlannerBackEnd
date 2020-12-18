@@ -15,6 +15,12 @@ public class RecipeDTO {
         this.ingredientList = ingredientList;
     }
 
+    public RecipeDTO(int id,String recipe_name, List<IngredientEntity> ingredientList) {
+        this.id = id;
+        this.recipe_name = recipe_name;
+        this.ingredientList = ingredientList;
+    }
+
     public RecipeDTO() {
 
     }

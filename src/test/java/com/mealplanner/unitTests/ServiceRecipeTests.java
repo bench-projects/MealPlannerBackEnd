@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -65,5 +66,21 @@ public class ServiceRecipeTests {
         when(this.recipeRepository.save(recipeEntity)).thenReturn(recipeEntity);
 
         assertThat(this.recipeService.updateRecipeEntity(1, recipeEntity)).isEqualTo(Optional.of(recipeEntity));
+    }
+
+    @Test
+    public void getRecipesByIdTest(){
+        List<RecipeEntity> recipeEntities = new ArrayList<>();
+        recipeEntities.add(new RecipeEntity("Test Get", "1"));
+        recipeEntities.add(new RecipeEntity("Test Get2", "2"));
+
+        List<Integer> idList = new ArrayList<>();
+        idList.add(1);
+        idList.add(2);
+
+        when(this.recipeRepository.findAllById(idList)).thenReturn(recipeEntities);
+        List<RecipeEntity> actualRecipeEntities = this.recipeService.getAllRecipesById(idList);
+        assertEquals(actualRecipeEntities.get(0).getId(), recipeEntities.get(0).getId());
+        assertEquals(actualRecipeEntities.get(1).getId(), recipeEntities.get(1).getId());
     }
 }
