@@ -2,7 +2,6 @@ package com.mealplanner.controller;
 
 import com.mealplanner.entity.MealPlanDTO;
 import com.mealplanner.entity.MealPlanEntity;
-import com.mealplanner.entity.RecipeEntity;
 import com.mealplanner.mapper.MealPlannerMapper;
 import com.mealplanner.service.MealPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
