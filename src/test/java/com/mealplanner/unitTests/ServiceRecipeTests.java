@@ -1,5 +1,6 @@
 package com.mealplanner.unitTests;
 
+import com.mealplanner.entity.IngredientEntity;
 import com.mealplanner.entity.RecipeEntity;
 import com.mealplanner.repository.RecipeRepository;
 import com.mealplanner.service.RecipeService;
@@ -14,6 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -42,7 +45,8 @@ public class ServiceRecipeTests {
 
     @Test
     public void getRecipeTest() {
-        RecipeEntity recipeEntity = new RecipeEntity("test", "1");
+        RecipeEntity recipeEntity = new RecipeEntity("test", Stream.of(new IngredientEntity("Chicken", 5))
+                .collect(Collectors.toSet()));
 
         when(this.recipeRepository.findById(0)).thenReturn(Optional.of(recipeEntity));
 
@@ -51,7 +55,8 @@ public class ServiceRecipeTests {
 
     @Test
     public void addRecipeTest() {
-        RecipeEntity recipeEntity = new RecipeEntity("testAdd", "0");
+        RecipeEntity recipeEntity = new RecipeEntity("testAdd", Stream.of(new IngredientEntity("Chicken", 5))
+                .collect(Collectors.toSet()));
 
         when(this.recipeRepository.save(recipeEntity)).thenReturn(recipeEntity);
 
@@ -60,7 +65,8 @@ public class ServiceRecipeTests {
 
     @Test
     public void updateRecipeEntityTest() {
-        RecipeEntity recipeEntity = new RecipeEntity("TestUpdate", "0");
+        RecipeEntity recipeEntity = new RecipeEntity("TestUpdate", Stream.of(new IngredientEntity("Chicken", 5))
+                .collect(Collectors.toSet()));
 
         when(this.recipeRepository.findById(1)).thenReturn(Optional.of(recipeEntity));
         when(this.recipeRepository.save(recipeEntity)).thenReturn(recipeEntity);
@@ -71,8 +77,10 @@ public class ServiceRecipeTests {
     @Test
     public void getRecipesByIdTest(){
         List<RecipeEntity> recipeEntities = new ArrayList<>();
-        recipeEntities.add(new RecipeEntity("Test Get", "1"));
-        recipeEntities.add(new RecipeEntity("Test Get2", "2"));
+        recipeEntities.add(new RecipeEntity("Test Get", Stream.of(new IngredientEntity("Chicken", 5))
+                .collect(Collectors.toSet())));
+        recipeEntities.add(new RecipeEntity("Test Get2", Stream.of(new IngredientEntity("Chicken", 5))
+                .collect(Collectors.toSet())));
 
         List<Integer> idList = new ArrayList<>();
         idList.add(1);

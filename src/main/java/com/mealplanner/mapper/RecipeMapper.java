@@ -32,9 +32,9 @@ public class RecipeMapper {
     }
 
     public RecipeDTO getIngredients(RecipeEntity recipeEntity) {
-        List<String> ingredientStringIdList = toList(recipeEntity.getIngredients().split(","));
+        //List<String> ingredientStringIdList = toList(recipeEntity.getIngredients().split(","));
         List<Integer> ingredientIdList = new ArrayList<>();
-        ingredientStringIdList.forEach(stringId -> ingredientIdList.add(Integer.valueOf(stringId)));
+        //ingredientStringIdList.forEach(stringId -> ingredientIdList.add(Integer.valueOf(stringId)));
         return new RecipeDTO(recipeEntity.getId(), recipeEntity.getRecipe_name(), ingredientsService.getAllIngredientsById(ingredientIdList));
     }
 }

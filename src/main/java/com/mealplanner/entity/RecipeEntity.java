@@ -1,6 +1,8 @@
 package com.mealplanner.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "recipe")
@@ -9,15 +11,21 @@ public class RecipeEntity {
     @Id
     @GeneratedValue
     private int id;
+
     @Column(name = "recipe_name", nullable = false, length = 200)
     private String recipe_name;
-    @Column(name = "ingredient_ids")
-    private String ingredients;
+
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "recipe_link",
+            joinColumns = {@JoinColumn(name = "recipe_id")},
+            inverseJoinColumns = {@JoinColumn(name = "ingredient_id")})
+    private Set<IngredientEntity> ingredients = new HashSet<>();
 
     public RecipeEntity() {
     }
 
-    public RecipeEntity(String recipe_name, String ingredients) {
+    public RecipeEntity(String recipe_name, Set<IngredientEntity> ingredients) {
         this.recipe_name = recipe_name;
         this.ingredients = ingredients;
     }
@@ -38,11 +46,11 @@ public class RecipeEntity {
         this.recipe_name = recipe_name;
     }
 
-    public String getIngredients() {
+    public Set<IngredientEntity> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(String ingredients) {
+    public void setIngredients(Set<IngredientEntity> ingredients) {
         this.ingredients = ingredients;
     }
 }

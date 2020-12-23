@@ -2,10 +2,12 @@ package com.mealplanner.entity;
 
 import com.mealplanner.repository.IngredientsRepository;
 import com.mealplanner.repository.MealPlanRepository;
-import com.mealplanner.repository.RecipeIngredientRepository;
 import com.mealplanner.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class DataLoader {
@@ -33,8 +35,14 @@ public class DataLoader {
     }
 
     private void LoadRecipes(){
-        recipeRepository.save(new RecipeEntity("Onion Soup", "1,4,6"));
-        recipeRepository.save(new RecipeEntity("Tomato Pasta", "6,2,3"));
+        recipeRepository.save(new RecipeEntity("Onion Soup", Stream.of(new IngredientEntity("Potatoes", 5),
+                new IngredientEntity("Leak", 7),
+                new IngredientEntity("Onion", 4))
+                .collect(Collectors.toSet())));
+        recipeRepository.save(new RecipeEntity("Tomato Pasta", Stream.of(new IngredientEntity("Onion", 4),
+                new IngredientEntity("Tomatoes", 3),
+                new IngredientEntity("Pasta", 87))
+                .collect(Collectors.toSet())));
     }
 
     private void LoadMealPlan(){
