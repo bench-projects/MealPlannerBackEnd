@@ -51,7 +51,7 @@ public class ServiceIngredientUnitTests {
     public void addIngredientTest() {
         IngredientEntity ingredientEntity = new IngredientEntity("testAdd", 0);
 
-        Mockito.when(this.ingredientsRepository.save(ingredientEntity)).thenReturn(Optional.of(ingredientEntity));
+        Mockito.when(this.ingredientsRepository.save(ingredientEntity)).thenReturn(ingredientEntity);
 
         assertThat(this.ingredientsService.addIngredient(ingredientEntity)).isEqualTo(ingredientEntity);
     }
@@ -61,7 +61,7 @@ public class ServiceIngredientUnitTests {
         IngredientEntity ingredientEntity = new IngredientEntity("TestUpdate", 2);
 
         Mockito.when(this.ingredientsRepository.findById(1)).thenReturn(Optional.of(ingredientEntity));
-        Mockito.when(this.ingredientsRepository.save(ingredientEntity)).thenReturn(Optional.of(ingredientEntity));
+        Mockito.when(this.ingredientsRepository.save(ingredientEntity)).thenReturn(ingredientEntity);
 
         assertThat(this.ingredientsService.updateIngredientEntity(1, ingredientEntity)).isEqualTo(Optional.of(ingredientEntity));
     }

@@ -8,14 +8,14 @@ public class RecipeDTO {
 
     private String recipe_name;
 
-    private List<IngredientEntity> ingredientList = new ArrayList<>();
+    private List<IngredientDTO> ingredientList = new ArrayList<>();
 
-    public RecipeDTO(String recipe_name, List<IngredientEntity> ingredientList) {
+    public RecipeDTO(String recipe_name, List<IngredientDTO> ingredientList) {
         this.recipe_name = recipe_name;
         this.ingredientList = ingredientList;
     }
 
-    public RecipeDTO(int id,String recipe_name, List<IngredientEntity> ingredientList) {
+    public RecipeDTO(int id,String recipe_name, List<IngredientDTO> ingredientList) {
         this.id = id;
         this.recipe_name = recipe_name;
         this.ingredientList = ingredientList;
@@ -33,11 +33,11 @@ public class RecipeDTO {
         this.recipe_name = recipe_name;
     }
 
-    public List<IngredientEntity> getIngredientList() {
+    public List<IngredientDTO> getIngredientList() {
         return ingredientList;
     }
 
-    public void setIngredientList(List<IngredientEntity> ingredientList) {
+    public void setIngredientList(List<IngredientDTO> ingredientList) {
         this.ingredientList = ingredientList;
     }
 

@@ -4,27 +4,9 @@ import com.mealplanner.entity.IngredientEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.persistence.EntityManager;
+import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
-public abstract class IngredientsRepository implements JpaRepository<IngredientEntity, Integer> {
-
-    private EntityManager entityManager;
-
-    public IngredientsRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
-    @Override
-    public Optional<IngredientEntity> save(IngredientEntity ingredientEntity){
-        try{
-            entityManager.getTransaction().begin();
-            entityManager.persist(ingredientEntity);
-            entityManager.getTransaction().commit();
-            return Optional.of(ingredientEntity);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return Optional.empty();
-    }
-
+public interface IngredientsRepository extends JpaRepository<IngredientEntity, Integer> {
 }

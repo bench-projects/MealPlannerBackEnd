@@ -1,6 +1,7 @@
 package com.mealplanner.unitTests;
 
 import com.mealplanner.controller.RecipeController;
+import com.mealplanner.entity.IngredientDTO;
 import com.mealplanner.entity.IngredientEntity;
 import com.mealplanner.entity.RecipeDTO;
 import com.mealplanner.entity.RecipeEntity;
@@ -61,9 +62,9 @@ public class ControllerRecipeUnitTests {
 
         RecipeDTO actualRecipeDTO = Objects.requireNonNull(this.recipeController.getRecipes().getBody()).get(0);
         assertEquals(actualRecipeDTO.getRecipe_name(), "Pie");
-        IngredientEntity actualIngredientEntity = actualRecipeDTO.getIngredientList().get(0);
-        assertEquals(actualIngredientEntity.getIngredient_name(), "Chicken");
-        assertEquals(actualIngredientEntity.getQuantity_count(), 3);
+        IngredientDTO actualIngredientDTO = actualRecipeDTO.getIngredientList().get(0);
+        assertEquals(actualIngredientDTO.getIngredient_name(), "Chicken");
+        assertEquals(actualIngredientDTO.getQuantity_count(), 3);
         assertThat(this.recipeController.getRecipes().getStatusCodeValue()).isEqualTo((200));
     }
 
@@ -84,9 +85,9 @@ public class ControllerRecipeUnitTests {
 
         RecipeDTO actualRecipeDTO = Objects.requireNonNull(this.recipeController.getRecipe(1).getBody()).get(0);
         assertEquals(actualRecipeDTO.getRecipe_name(), "Curry");
-        IngredientEntity actualIngredientEntity = actualRecipeDTO.getIngredientList().get(0);
-        assertEquals(actualIngredientEntity.getIngredient_name(), "Lamb");
-        assertEquals(actualIngredientEntity.getQuantity_count(), 2);
+        IngredientDTO actualIngredientDTO = actualRecipeDTO.getIngredientList().get(0);
+        assertEquals(actualIngredientDTO.getIngredient_name(), "Lamb");
+        assertEquals(actualIngredientDTO.getQuantity_count(), 2);
         assertThat(this.recipeController.getRecipes().getStatusCodeValue()).isEqualTo((200));
     }
 

@@ -11,13 +11,14 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hibernate.internal.util.collections.ArrayHelper.toList;
-
 @Component
 public class RecipeMapper {
 
     @Autowired
     private IngredientsService ingredientsService;
+
+    @Autowired
+    private IngredientsMapper ingredientsMapper;
 
     public ResponseEntity<List<RecipeDTO>> mapRecipe(List<RecipeEntity> recipes) {
         List<RecipeDTO> recipeDTOList = new ArrayList<>();
@@ -32,9 +33,6 @@ public class RecipeMapper {
     }
 
     public RecipeDTO getIngredients(RecipeEntity recipeEntity) {
-        //List<String> ingredientStringIdList = toList(recipeEntity.getIngredients().split(","));
-        List<Integer> ingredientIdList = new ArrayList<>();
-        //ingredientStringIdList.forEach(stringId -> ingredientIdList.add(Integer.valueOf(stringId)));
-        return new RecipeDTO(recipeEntity.getId(), recipeEntity.getRecipe_name(), ingredientsService.getAllIngredientsById(ingredientIdList));
+        return new RecipeDTO(recipeEntity.getId(), recipeEntity.getRecipe_name(), ingredientsMapper.mapIngredients(recipeEntity.getIngredients()));
     }
 }
