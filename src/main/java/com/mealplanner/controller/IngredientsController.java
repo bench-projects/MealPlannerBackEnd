@@ -1,12 +1,15 @@
 package com.mealplanner.controller;
 
+import com.mealplanner.entity.IngredientDTO;
 import com.mealplanner.entity.IngredientEntity;
+import com.mealplanner.mapper.IngredientsMapper;
 import com.mealplanner.service.IngredientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,18 +19,21 @@ public class IngredientsController {
 
     private final IngredientsService ingredientsService;
 
+    @Autowired
+    private IngredientsMapper ingredientsMapper;
+
     private IngredientsController(@Autowired IngredientsService ingredientsService) {
         this.ingredientsService = ingredientsService;
     }
 
     @GetMapping(path = "/get/All")
-    public ResponseEntity<List<IngredientEntity>> getAllIngredients() {
-        return new ResponseEntity<>(ingredientsService.getAllIngredients(), HttpStatus.OK);
+    public ResponseEntity<List<IngredientDTO>> getAllIngredients() {
+        return new ResponseEntity<>(ingredientsMapper.mapIngredients(new HashSet<>(ingredientsService.getAllIngredients())), HttpStatus.OK);
     }
 
     @GetMapping(path = "/get/{id}")
-    public ResponseEntity<Optional<IngredientEntity>> getIngredient(@PathVariable("id") Integer id) {
-        Optional<IngredientEntity> existingIngredient = this.ingredientsService.getIngredient(id);
+    public ResponseEntity<Optional<IngredientDTO>> getIngredient(@PathVariable("id") Integer id) {
+        Optional<IngredientDTO> existingIngredient = ingredientsMapper.mapIngredient(this.ingredientsService.getIngredient(id));
         if (existingIngredient.isPresent()) {
             return ResponseEntity.ok(existingIngredient);
         } else {
