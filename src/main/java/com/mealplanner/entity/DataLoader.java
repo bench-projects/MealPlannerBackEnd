@@ -35,6 +35,7 @@ public class DataLoader {
     private void LoadRecipes(){
         recipeRepository.save(new RecipeEntity("Onion Soup", "1,4,6"));
         recipeRepository.save(new RecipeEntity("Tomato Pasta", "6,2,3"));
+        recipeRepository.save(new RecipeEntity("Nothing", ""));
     }
 
     private void LoadMealPlan(){
