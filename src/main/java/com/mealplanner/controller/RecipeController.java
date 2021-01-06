@@ -4,6 +4,7 @@ import com.mealplanner.entity.RecipeDTO;
 import com.mealplanner.entity.RecipeEntity;
 import com.mealplanner.mapper.RecipeMapper;
 import com.mealplanner.service.RecipeService;
+import com.mealplanner.validation.FieldValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,9 @@ public class RecipeController {
 
     @PostMapping(path = "/add")
     public ResponseEntity<RecipeEntity> addRecipe(@RequestBody RecipeEntity recipeEntity) {
+        if (new FieldValidation().checkName(recipeEntity) == false){
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(recipeService.addRecipe(recipeEntity));
     }
 

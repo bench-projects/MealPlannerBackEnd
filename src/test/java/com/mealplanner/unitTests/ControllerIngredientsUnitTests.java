@@ -60,6 +60,14 @@ public class ControllerIngredientsUnitTests {
     }
 
     @Test
+    public void addIngredientFailTest() {
+        IngredientEntity ingredientEntity = new IngredientEntity("", 5);
+
+        assertThat(this.ingredientsController.addIngredient(ingredientEntity).getStatusCodeValue()).isEqualTo((400));
+    }
+
+
+    @Test
     public void updateIngredientEntityTest() {
         IngredientEntity ingredientEntity = new IngredientEntity();
 
