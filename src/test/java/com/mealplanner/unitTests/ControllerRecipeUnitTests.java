@@ -94,6 +94,13 @@ public class ControllerRecipeUnitTests {
     }
 
     @Test
+    public void addRecipeFailTest() {
+        RecipeEntity recipeEntity = new RecipeEntity("", "1");
+
+        assertThat(this.recipeController.addRecipe(recipeEntity).getStatusCodeValue()).isEqualTo((400));
+    }
+
+    @Test
     public void updateRecipeEntityTest() {
         RecipeEntity recipeEntity = new RecipeEntity();
 

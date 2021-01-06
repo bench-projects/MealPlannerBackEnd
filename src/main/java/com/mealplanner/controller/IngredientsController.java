@@ -2,7 +2,7 @@ package com.mealplanner.controller;
 
 import com.mealplanner.entity.IngredientEntity;
 import com.mealplanner.service.IngredientsService;
-import com.mealplanner.validation.IngredientValidation;
+import com.mealplanner.validation.FieldValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +38,7 @@ public class IngredientsController {
 
     @PostMapping(path = "/add")
     public ResponseEntity<IngredientEntity> addIngredient(@RequestBody IngredientEntity ingredientEntity) {
-        if (new IngredientValidation().checkName(ingredientEntity) == false){
+        if (new FieldValidation().checkName(ingredientEntity) == false){
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(ingredientsService.addIngredient(ingredientEntity));
