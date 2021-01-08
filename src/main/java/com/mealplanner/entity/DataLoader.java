@@ -39,6 +39,6 @@ public class DataLoader {
     }
 
     private void LoadMealPlan(){
-        mealPlanRepository.save(new MealPlanEntity("7,7,8", "8,8,8", "", "", "7,8", "", "8,7" ));
+        mealPlanRepository.save(new MealPlanEntity("7,7,8", "8,8,8", "9,9,9", "9,9,9", "7,8,9", "9,9,8", "8,7,9" ));
     }
 }
